@@ -35,11 +35,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="song in songs">
+          <tr ng-repeat="song in songs track by $index">  
+            <!-- track by for persistant localstore in HTML5 -->
             <td>
               <div class="pull-left">
-                <strong>{{song.artist}}</strong><br />
-                <small>{{song.title}}</small>
+                <strong>{{song.artist | titleize}}</strong><br />
+                <small>{{song.title | titleize}}</small>
+              </div>
+              <div class="pull-right">
+                <button type="button" class="btn btn-danger pull-right" ng-click="deleteSong($index)">
+                  <i class="fa fa-trash-o"></i>
+                </button>
               </div>
             </td>
           </tr>
@@ -64,6 +70,10 @@
           </div>
         </div>
       </form>
+      <br>
+      <pre>{{songs | json}}</pre>
+      <pre>{{newSong  | json}}</pre>
+
     </div>
 
     <!-- Scripts below -->  
